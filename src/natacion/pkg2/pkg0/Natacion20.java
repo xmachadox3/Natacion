@@ -127,3 +127,74 @@ public class Natacion20 {
                 
     }   
  }
+
+//Nadador
+class Nadador {
+    //atributos
+    private long ci=0;
+    private String nombre="";
+    private String apellido="";
+    private double marcapersonal=0.0;
+    private double tiempofinal = 0.0;
+  
+    // constructor
+    public Nadador(long ci, String nombre, String apellido, double marcapersonal){
+     this.ci=ci;
+     this.nombre=nombre;
+     this.apellido=apellido;
+     this.marcapersonal=marcapersonal;
+    }    
+    
+    public long getCi() {
+        return ci;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public double getMarcapersonal() {
+        return marcapersonal;
+    }   
+
+    public double getTiempofinal() {
+        return tiempofinal;
+    }
+
+    public void setTiempofinal(double tiempofinal) {
+        this.tiempofinal = tiempofinal;
+    }
+
+    @Override
+    public String toString() {
+        return "Nadador{" + "ci=" + ci + ", nombre=" + nombre + ", apellido=" + apellido + ", marcapersonal=" + marcapersonal + '}';
+    }
+        
+}
+
+//Carril
+class Carril{
+    //atributos con un solo carril bastaba, y se hacia un array de carriles. 
+    private String carril;
+    private Nadador x;
+
+    public String getCarril() {
+        return carril;
+    }
+
+    public void setCarril(String nombre){ // u.u idiota
+        carril = nombre;
+    }
+    
+    public Nadador getNadador(){
+        return this.x;
+    }
+    
+    public void setNadador(Nadador nadador){
+        this.x = nadador;
+    }
+}
