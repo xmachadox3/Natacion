@@ -1,9 +1,6 @@
 package natacion.pkg2.pkg0;
 import java.text.DecimalFormat;
-import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
-import javax.swing.JOptionPane;
 
 
 public class Natacion20 {
@@ -94,100 +91,39 @@ public class Natacion20 {
         System.out.println("\n \t **** Resultados de la competencia **** ");
         for(int i=0; i<nadadores.length;i++){
             //libre
-            if(prueba.equalsIgnoreCase("50 metros") && estilo.equalsIgnoreCase("Libre")&& categoria.equalsIgnoreCase("Maxima") && nadadores[i].getMarcapersonal()<=29){ 
-            do{
-                tiempof[i]=Math.random()*(25-29)+29;
-                //El while hara la funcion de mejora del nadador..
-            }while(tiempof[i]>nadadores[i].getMarcapersonal());   
-            tiemponadadores[i]=tiempof[i];
-            //Usar cod ordenar nadadores para simular la victoria
-            
-            }
-           
+            if(prueba.equalsIgnoreCase("50 metros") && estilo.equalsIgnoreCase("Libre")&& categoria.equalsIgnoreCase("Maxima") && nadadores[i].getMarcapersonal()<=29){                            
+                nadadores[i].setTiempofinal(Math.random()*(29-nadadores[i].getMarcapersonal())+25);
+                //Usar cod ordenar nadadores para simular la victoria            
+            }           
             //espalda
             if(prueba.equalsIgnoreCase("50 metros") && estilo.equalsIgnoreCase("Espalda")&& categoria.equalsIgnoreCase("Maxima")&& nadadores[i].getMarcapersonal()<30){
-            tiempof[i]=Math.random()*(26-30)+30;
-            
+                tiempof[i]=Math.random()*(30-26)+30;            
             }
             //mariposa
             if(prueba.equalsIgnoreCase("50 metros") && estilo.equalsIgnoreCase("Mariposa")&& categoria.equalsIgnoreCase("Maxima")&& nadadores[i].getMarcapersonal()<30){
-            tiempof[i]=Math.random()*(25-30)+30;
-            
+                tiempof[i]=Math.random()*(30-25)+30;            
             }
             //pecho
             if(prueba.equalsIgnoreCase("50 metros") && estilo.equalsIgnoreCase("Pecho")&& categoria.equalsIgnoreCase("Maxima")&& nadadores[i].getMarcapersonal()<31){
-            tiempof[i]=Math.random()*(27-31)+31;
-            
+                tiempof[i]=Math.random()*(31-27)+31;
             }
             //Resultados
-            System.out.println("El tiempo del nadador "+nadadores[i].getNombre()+" "+nadadores[i].getApellido()+" es de " +df.format(tiempof[i]));
-          
+            
         }
+        aux = null; 
+        for(int p = 0; p < nadadores.length; p++){
+            for(int j = p +1 ; j < nadadores.length; j++){ 
+                if(nadadores[p].getTiempofinal() > nadadores[j].getTiempofinal()){
+                    aux = nadadores[p];
+                    nadadores[p] = nadadores[j];
+                    nadadores[j] = aux;
+                }
+            }
+        }
+          
+            System.out.println("***Ganador*** "+nadadores[0].getNombre()+" "+nadadores[0].getApellido()+" es de " +df.format(nadadores[0].getTiempofinal()));          
+            for(int i=1; i<nadadores.length;i++)
+                System.out.println("El tiempo del nadador "+nadadores[i].getNombre()+" "+nadadores[i].getApellido()+" es de " +df.format(nadadores[i].getTiempofinal()));          
+                
     }   
  }
-
-//Nadador
-class Nadador {
-    //atributos
-    private long ci=0;
-    private String nombre="";
-    private String apellido="";
-    private double marcapersonal=0.0;
-  
-    // constructor
-    public Nadador(long ci, String nombre, String apellido, double marcapersonal){
-     this.ci=ci;
-     this.nombre=nombre;
-     this.apellido=apellido;
-     this.marcapersonal=marcapersonal;
-    }    
-    
-    public long getCi() {
-        return ci;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public double getMarcapersonal() {
-        return marcapersonal;
-    }   
-
-    @Override
-    public String toString() {
-        return "Nadador{" + "ci=" + ci + ", nombre=" + nombre + ", apellido=" + apellido + ", marcapersonal=" + marcapersonal + '}';
-    }
-        
-}
-
-//Carril
-class Carril{
-    //atributos con un solo carril bastaba, y se hacia un array de carriles. 
-    private String carril;
-    private Nadador x;
-
-    public String getCarril() {
-        return carril;
-    }
-
-    public void setCarril(String nombre){ // u.u idiota
-        carril = nombre;
-    }
-    
-    public Nadador getNadador(){
-        return this.x;
-    }
-    
-    public void setNadador(Nadador nadador){
-        this.x = nadador;
-    }
-}
-
-   
-
-
